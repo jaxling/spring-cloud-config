@@ -1,0 +1,88 @@
+spring:
+  profiles:
+    active:
+    - dev
+---
+server:
+  port: 8001
+mybatis-plus:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.jaxling.api.entities
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+  global-config:
+    db-column-underline: true
+spring:
+  profiles: dev
+  application:
+    name: micro-service-dept
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/study?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true
+      username: root
+      password:
+      initial-size: 1 #配置初始化大小
+      min-idle: 1 #配置最小
+      max-active: 20 #连接最大
+      max-wait: 60000 #配置获取连接等待超时的时间
+      pool-prepared-statements: true
+      validation-query: SELECT 1
+      test-on-borrow: true
+      test-while-idle: true
+      test-on-return: true
+      time-between-eviction-runs-millis: 60000 #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 300000 #配置一个连接在池中最小生存的时间，单位是毫秒
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka,http://localhost:7003/eureka
+  instance:
+    instance-id: micro-service-cloud-dept8001
+    prefer-ip-address: true
+info:
+  app.name: micro-service-cloud
+  company.name: www.jaxling.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+---
+server:
+  port: 8001
+mybatis-plus:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.jaxling.api.entities
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+  global-config:
+    db-column-underline: true
+spring:
+  profiles: test
+  application:
+    name: micro-service-dept
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/study8002?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowMultiQueries=true
+      username: root
+      password:
+      initial-size: 1 #配置初始化大小
+      min-idle: 1 #配置最小
+      max-active: 20 #连接最大
+      max-wait: 60000 #配置获取连接等待超时的时间
+      pool-prepared-statements: true
+      validation-query: SELECT 1
+      test-on-borrow: true
+      test-while-idle: true
+      test-on-return: true
+      time-between-eviction-runs-millis: 60000 #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 300000 #配置一个连接在池中最小生存的时间，单位是毫秒
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka,http://localhost:7003/eureka
+  instance:
+    instance-id: micro-service-cloud-dept8001
+    prefer-ip-address: true
+info:
+  app.name: micro-service-cloud
+  company.name: www.jaxling.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
